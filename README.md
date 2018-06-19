@@ -12,7 +12,7 @@ Base of this image builds a tagged version of [debian:jessie](https://hub.docker
 
 ##### Host network
 
-The container needs the "Host" network stack to be shared with the container. 
+The container needs the "Host" network stack to be shared with the container. Using this mode makes port mapping unnecessary since all the container's used ports are exposed to the host. This is why the container's SSH port `22` is getting available on the host without a discrete port mapping.
 
 ##### Privileged mode
 
