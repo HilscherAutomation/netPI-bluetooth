@@ -1,18 +1,20 @@
 ## Bluetooth
 
-Made for [netPI](https://www.netiot.com/netpi/), the Open Edge Connectivity Ecosystem
+Made for [netPI](https://www.netiot.com/netpi/), the Raspberry Pi 3 Architecture based Industrial suited Open Edge Connectivity Ecosystem
 
 ### Debian with SSH, dbus and latest bluez bluetooth stack 
 
 The image provided hereunder deploys a container with latest bluetooth protocol stack to enable a bluetooth communication in a container.
 
-Base of this image builds a tagged version of [debian:jessie](https://hub.docker.com/r/resin/armv7hf-debian/tags/) with enabled [SSH](https://en.wikipedia.org/wiki/Secure_Shell), a source code compiled bluez stack [bluez](http://www.bluez.org/) and firmware for the BCM bluetooth chip BCM43438.
+Base of this image builds a tagged version of [debian:stretch](https://hub.docker.com/r/resin/armv7hf-debian/tags/) with enabled [SSH](https://en.wikipedia.org/wiki/Secure_Shell), a source code compiled bluez stack [bluez](http://www.bluez.org/) and [firmware](https://github.com/OpenELEC/misc-firmware/tree/master/firmware/brcm) for the onboard BCM bluetooth chip BCM43438.
 
 #### Container prerequisites
 
 ##### Host network
 
-The container needs the "Host" network stack to be shared with the container. Using this mode makes port mapping unnecessary since all the container's used ports are exposed to the host. This is why the container's SSH port `22` is getting available on the host without a discrete port mapping.
+The container needs the Docker "Host" network stack to be shared with the container. 
+
+Hint: Using this mode makes port mapping unnecessary since all the container's used ports are exposed to the host. This is why the container's used SSH server port `22` is getting available on the host without a discrete port mapping.
 
 ##### Privileged mode
 
@@ -42,24 +44,19 @@ STEP 3. Enter the following parameters under **Containers > Add Container**
 
 STEP 4. Press the button **Actions > Start container**
 
-Pulling the image from Docker Hub may take up to 5 minutes.
+Pulling the image from Docker Hub may take up to 10 minutes.
 
 #### Accessing
 
-The container starts the SSH service and the bluetooth device hci0 automatically.
+The container starts the SSH server and the bluetooth device hci0 automatically.
 
 Login to it with an SSH client such as [putty](http://www.putty.org/) using netPI's IP address at port `22`. Use the credentials `root` as user and `root` as password when asked and you are logged in as root.
 
-Use bluez tools such as bluetoothctl, hciconfig, hcitool and more as usual.
+Use bluez tools such as bluetoothctl, hciconfig, hcitool as usual. For a simple test call [bluetoothctrl](https://wiki.archlinux.org/index.php/bluetooth) to start the bluetooth interactive command utility. Input `scan on` to discover nearby bluetooth devices.
 
 #### Tags
 
 * **hilscher/netPI-bluetooth:latest** - non-versioned latest development output of the master branch. Shouldn't be used since under development all the time.
-
-* **hilscher/netPI-bluetooth:0.9.1.0** - runs with netPI's system software version V0.9.1.0. In this version the dbus host socket needs to be exposed to the container to run bluetooth **Volumes > Volume mapping > map additional volume** : `container: /var/run/dbus(bind)-> volume: /var/run/dbus(read/writeable)`
-
-* **hilscher/netPI-bluetooth:1.1.0.0** - runs with netPI's system software version V1.1.0.0.
-
 
 #### GitHub sources
 The image is built from the GitHub project [netPI-bluetooth](https://github.com/Hilscher/netPI-bluetooth). It complies with the [Dockerfile](https://docs.docker.com/engine/reference/builder/) method to build a Docker image [automated](https://docs.docker.com/docker-hub/builds/).
