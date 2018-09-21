@@ -27,10 +27,6 @@ term_handler() {
 # on callback, stop all started processes in term_handler
 trap 'kill ${!}; term_handler' SIGINT SIGKILL SIGTERM SIGQUIT SIGTSTP SIGSTOP SIGHUP
 
-echo "makeing userland libraries known"
-LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH:/opt/vc/lib/
-export LD_LIBRARY_PATH
-
 # run applications in the background
 echo "starting ssh ..."
 /etc/init.d/ssh start &
