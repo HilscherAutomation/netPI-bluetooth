@@ -27,6 +27,10 @@ term_handler() {
 # on callback, stop all started processes in term_handler
 trap 'kill ${!}; term_handler' SIGINT SIGKILL SIGTERM SIGQUIT SIGTSTP SIGSTOP SIGHUP
 
+echo "makeing userland libraries known"
+LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH:/opt/vc/lib/
+export LD_LIBRARY_PATH
+
 # run applications in the background
 echo "starting ssh ..."
 /etc/init.d/ssh start &
@@ -35,7 +39,13 @@ echo "starting ssh ..."
 echo "starting dbus ..."
 /etc/init.d/dbus start
 
-#start BCM chip
+#reset BCM chip (making sure get access even after container restart)
+/opt/vc/bin/vcmailbox 0x38041 8 8 128 0
+sleep 1
+/opt/vc/bin/vcmailbox 0x38041 8 8 128 1
+sleep 1
+
+#load firmware to BCM chip and attach to hci0
 hciattach /dev/ttyAMA0 bcm43xx 921600 noflow
 
 #create hci0 device

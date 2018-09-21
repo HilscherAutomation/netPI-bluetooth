@@ -6,11 +6,11 @@ RUN [ "cross-build-start" ]
 
 #labeling
 LABEL maintainer="netpi@hilscher.com" \
-      version="V1.1.1" \
+      version="V1.2.0" \
       description="Debian with bluez protocol stack"
 
 #version
-ENV HILSCHERNETPI_BLUEZ_VERSION 1.1.1
+ENV HILSCHERNETPI_BLUEZ_VERSION 1.2.0
 ENV BLUEZ_VERSION 5.50 
 
 #copy files
@@ -18,7 +18,7 @@ COPY "./init.d/*" /etc/init.d/
 
 #install prerequisites
 RUN apt-get update  \
-    && apt-get install -y openssh-server build-essential wget dbus \
+    && apt-get install -y openssh-server build-essential wget dbus git \
        libical-dev libdbus-1-dev libglib2.0-dev libreadline-dev libudev-dev \
     && echo 'root:root' | chpasswd \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
@@ -43,6 +43,11 @@ RUN apt-get update  \
     && make \
 #install bluez
     && make install \
+#install userland raspberry tools
+    && git clone --depth 1 https://github.com/raspberrypi/firmware /tmp/firmware \
+    && mv /tmp/firmware/hardfp/opt/vc /opt \
+    && echo "/opt/vc/lib" >/etc/ld.so.conf.d/00-vmcs.conf \
+    && /sbin/ldconfig \
 #clean up
     && rm -rf /tmp/* \
     && apt-get remove wget \ 

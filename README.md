@@ -24,6 +24,8 @@ Only the privileged mode option lifts the enforced container limitations to allo
 
 To grant access to the BCM chip the `/dev/ttyAMA0` host device needs to be exposed to the container.
 
+To prevent the container from failing to load the BCM chip with firmware(when restarted), the BCM chip is physically reset by the container each time it is started. To grant access to the reset logic the `/dev/vcio` host device needs to be exposed to the container.
+
 #### Getting started
 
 STEP 1. Open netPI's landing page under `https://<netpi's ip address>`.
@@ -39,6 +41,8 @@ STEP 3. Enter the following parameters under **Containers > Add Container**
 * **Restart policy"** : `always`
 
 * **Runtime > Devices > add device**: `Host "/dev/ttyAMA0" -> Container "/dev/ttyAMA0"`
+
+* **Runtime > Devices > add device**: `Host "/dev/vcio" -> Container "/dev/vcio"`
 
 * **Runtime > Privileged mode** : `On`
 
