@@ -1,6 +1,6 @@
 ## Bluetooth
 
-Made for [netPI](https://www.netiot.com/netpi/), the Raspberry Pi 3 Architecture based Industrial suited Open Edge Connectivity Ecosystem
+Made for [netPI](https://www.netiot.com/netpi/), the Raspberry Pi 3B Architecture based industrial suited Open Edge Connectivity Ecosystem
 
 ### Debian with SSH, dbus and latest bluez bluetooth stack 
 
@@ -40,15 +40,13 @@ STEP 3. Enter the following parameters under **Containers > Add Container**
 
 * **Restart policy"** : `always`
 
-* **Runtime > Devices > add device**: `Host "/dev/ttyAMA0" -> Container "/dev/ttyAMA0"`
-
-* **Runtime > Devices > add device**: `Host "/dev/vcio" -> Container "/dev/vcio"`
+* **Runtime > Devices > add device**: `Host "/dev/ttyAMA0" -> Container "/dev/ttyAMA0"` and `Host "/dev/vcio" -> Container "/dev/vcio"`
 
 * **Runtime > Privileged mode** : `On`
 
-STEP 4. Press the button **Actions > Start container**
+STEP 4. Press the button **Actions > Start/Deploy container**
 
-Pulling the image from Docker Hub may take up to 10 minutes.
+Pulling the image may take a while (5-10mins). Sometimes it takes so long that a time out is indicated. In this case repeat the **Actions > Start/Deploy container** action.
 
 #### Accessing
 
@@ -56,18 +54,23 @@ The container starts the SSH server and the bluetooth device hci0 automatically.
 
 Login to it with an SSH client such as [putty](http://www.putty.org/) using netPI's IP address at port `22`. Use the credentials `root` as user and `root` as password when asked and you are logged in as root.
 
-Use bluez tools such as bluetoothctl, hciconfig, hcitool as usual. For a simple test call [bluetoothctrl](https://wiki.archlinux.org/index.php/bluetooth) to start the bluetooth interactive command utility. Input `scan on` to discover nearby bluetooth devices.
+Use bluez tools such as bluetoothctl, hciconfig, hcitool as usual. For a simple test call [bluetoothctrl](https://wiki.archlinux.org/ind#### Accessing
 
-#### Tags
+The container starts the SSH service automatically when started.
 
-* **hilscher/netPI-bluetooth:latest** - non-tagged (but tested OK) latest development output of the GitHub project master branch. 
+Login to it with an SSH client such as [putty](http://www.putty.org/) using netPI's IP address at your mapped port. Use the credentials `root` as user and `root` as password when asked and you are logged in as root user `root`.
 
-#### GitHub sources
-The image is built from the GitHub project [netPI-bluetooth](https://github.com/Hilscher/netPI-bluetooth). It complies with the [Dockerfile](https://docs.docker.com/engine/reference/builder/) method to build a Docker image [automated](https://docs.docker.com/docker-hub/builds/).
+Use Debian shell commands as usual.
 
-View the license information for the software in the Github project. As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).
-As for any pre-built image usage, it is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
+#### Automated build
 
-Hint: Cross-building the image for an ARM architecture based CPU on [Docker Hub](https://hub.docker.com/)(x86 CPU based servers) the Dockerfile uses the method described here [resin.io](https://resin.io/blog/building-arm-containers-on-any-x86-machine-even-dockerhub/). If you want to build the image on a Raspberry Pi directly then comment out the two lines `RUN [ "cross-build-start" ]` and `RUN [ "cross-build-end" ]` in the file Dockerfile before.
+The project complies with the scripting based [Dockerfile](https://docs.docker.com/engine/reference/builder/) method to build the image output file. Using this method is a precondition for an [automated](https://docs.docker.com/docker-hub/builds/) web based build process on DockerHub platform.
+
+DockerHub web platform is x86 CPU based, but an ARM CPU coded output file is needed for Raspberry systems. This is why the Dockerfile includes the [balena.io](https://balena.io/blog/building-arm-containers-on-any-x86-machine-even-dockerhub/) steps.
+
+#### License
+
+View the license information for the software in the project. As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).
+As for any pre-built image usage, it is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.ex.php/bluetooth) to start the bluetooth interactive command utility. Input `scan on` to discover nearby bluetooth devices.
 
 [![N|Solid](http://www.hilscher.com/fileadmin/templates/doctima_2013/resources/Images/logo_hilscher.png)](http://www.hilscher.com)  Hilscher Gesellschaft fuer Systemautomation mbH  www.hilscher.com
