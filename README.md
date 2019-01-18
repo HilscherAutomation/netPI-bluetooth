@@ -4,7 +4,7 @@ Made for [netPI](https://www.netiot.com/netpi/), the Raspberry Pi 3B Architectur
 
 ### Debian with SSH, dbus and latest bluez bluetooth stack 
 
-The image provided hereunder deploys a container with latest bluetooth protocol stack to enable bluetooth communications in a container.
+The image provided hereunder deploys a container with latest bluetooth protocol stack to enable netPI bluetooth communications in a container.
 
 Base of this image builds [debian](https://www.balena.io/docs/reference/base-images/base-images/) with enabled [SSH](https://en.wikipedia.org/wiki/Secure_Shell), a source code compiled bluez stack [bluez](http://www.bluez.org/) and [firmware](https://github.com/OpenELEC/misc-firmware/tree/master/firmware/brcm) for the onboard BCM bluetooth chip BCM43438.
 
@@ -54,7 +54,7 @@ The container starts the SSH server and the bluetooth device hci0 automatically.
 
 Login to it with an SSH client such as [putty](http://www.putty.org/) using netPI's IP address at port `22`. Use the credentials `root` as user and `root` as password when asked and you are logged in as root.
 
-Use bluez tools such as bluetoothctl, hciconfig, hcitool as usual. For a simple test call [bluetoothctrl](https://wiki.archlinux.org/index.php/bluetooth) to start the bluetooth interactive command utility. Input `scan on` to discover nearby bluetooth devices.
+Use bluez tools such as bluetoothctl, hciconfig, hcitool as usual. For a simple test call [bluetoothctl](https://wiki.archlinux.org/index.php/bluetooth) to start the bluetooth interactive command utility. Input `scan on` to discover nearby bluetooth devices.
 
 #### Automated build
 
