@@ -1,4 +1,4 @@
-#use latest armv7hf compatible raspbian OS version from group resin.io as base image
+#use armv7hf compatible base image
 FROM balenalib/armv7hf-debian:stretch
 
 #enable building ARM container on x86 machinery on the web (comment out next line if built on Raspberry) 
@@ -6,11 +6,11 @@ RUN [ "cross-build-start" ]
 
 #labeling
 LABEL maintainer="netpi@hilscher.com" \
-      version="V1.2.0" \
+      version="V1.2.1" \
       description="Debian with bluez protocol stack"
 
 #version
-ENV HILSCHERNETPI_BLUEZ_VERSION 1.2.0
+ENV HILSCHERNETPI_BLUEZ_VERSION 1.2.1
 ENV BLUEZ_VERSION 5.50 
 
 #copy files
@@ -19,7 +19,7 @@ COPY "./init.d/*" /etc/init.d/
 #install prerequisites
 RUN apt-get update  \
     && apt-get install -y openssh-server build-essential wget dbus git \
-       libical-dev libdbus-1-dev libglib2.0-dev libreadline-dev libudev-dev \
+       libical-dev libdbus-1-dev libglib2.0-dev libreadline-dev libudev-dev systemd \
     && echo 'root:root' | chpasswd \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd \
