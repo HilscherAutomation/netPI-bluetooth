@@ -1,5 +1,10 @@
 ## Bluetooth
 
+[![](https://images.microbadger.com/badges/image/hilschernetpi/netpi-bluetooth.svg)](https://microbadger.com/images/hilschernetpi/netpi-bluetooth "Bluetooth")
+[![](https://images.microbadger.com/badges/commit/hilschernetpi/netpi-bluetooth.svg)](https://microbadger.com/images/hilschernetpi//netpi-bluetooth "Bluetooth")
+[![Docker Registry](https://img.shields.io/docker/pulls/hilschernetpi/netpi-bluetooth.svg)](https://registry.hub.docker.com/u/hilschernetpi/netpi-bluetooth/)&nbsp;
+[![Image last updated](https://img.shields.io/badge/dynamic/json.svg?url=https://api.microbadger.com/v1/images/hilschernetpi/netpi-bluetooth&label=Image%20last%20updated&query=$.LastUpdated&colorB=007ec6)](http://microbadger.com/images/hilschernetpi/netpi-bluetooth "Image last updated")&nbsp;
+
 Made for [netPI](https://www.netiot.com/netpi/), the Raspberry Pi 3B Architecture based industrial suited Open Edge Connectivity Ecosystem
 
 ### Debian with SSH, dbus and latest bluez bluetooth stack 
@@ -18,7 +23,9 @@ Hint: Using this mode makes port mapping unnecessary since all the container's u
 
 ##### Privileged mode
 
-Only the privileged mode option lifts the enforced container limitations to allow usage of bluetooth in a container.
+The privileged mode option needs to be activated to lift the standard Docker enforced container limitations. With this setting the container and the applications inside are the getting (almost) all capabilities as if running on the Host directly. 
+
+netPI's secure reference software architecture prohibits root access to the Host system always. Even if priviledged mode is activated the intrinsic security of the Host Linux Kernel can not be compromised.
 
 ##### Host device
 
@@ -28,25 +35,25 @@ To prevent the container from failing to load the BCM chip with firmware(when re
 
 #### Getting started
 
-STEP 1. Open netPI's landing page under `https://<netpi's ip address>`.
+STEP 1. Open netPI's website in your browser (https).
 
 STEP 2. Click the Docker tile to open the [Portainer.io](http://portainer.io/) Docker management user interface.
 
-STEP 3. Enter the following parameters under **Containers > Add Container**
+STEP 3. Enter the following parameters under *Containers > + Add Container*
 
-* **Image**: `hilschernetpi/netpi-bluetooth`
+Parameter | Value | Remark
+:---------|:------ |:------
+*Image* | **hilschernetpi/netpi-bluetooth** |
+*Network > Network* | **host** |
+*Restart policy* | **always**
+*Runtime > Devices > +add device* | *Host path* **/dev/ttyAMA0** -> *Container path* **/dev/ttyAMA0** |
+*Runtime > Devices > +add device* | *Host path* **/dev/vcio** -> *Container path* **/dev/vcio** | 
+*Runtime > Privileged mode* | **On** |
 
-* **Network > Network**: `Host`
 
-* **Restart policy"** : `always`
+STEP 4. Press the button *Actions > Start/Deploy container*
 
-* **Runtime > Devices > add device**: `Host "/dev/ttyAMA0" -> Container "/dev/ttyAMA0"` and `Host "/dev/vcio" -> Container "/dev/vcio"`
-
-* **Runtime > Privileged mode** : `On`
-
-STEP 4. Press the button **Actions > Start/Deploy container**
-
-Pulling the image may take a while (5-10mins). Sometimes it takes so long that a time out is indicated. In this case repeat the **Actions > Start/Deploy container** action.
+Pulling the image may take a while (5-10mins). Sometimes it may take too long and a time out is indicated. In this case repeat STEP 4.
 
 #### Accessing
 
