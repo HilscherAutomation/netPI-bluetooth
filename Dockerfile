@@ -79,6 +79,7 @@ RUN apt-get update  \
     && /sbin/ldconfig \
 #clean up
     && rm -rf /tmp/* \
+    && rm -rf /opt/vc/src \
     && apt-get remove git curl \
     && apt-get -yqq autoremove \
     && apt-get -y clean \
