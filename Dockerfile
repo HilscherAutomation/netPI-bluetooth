@@ -50,7 +50,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN [ "cross-build-start" ]
 
 #version
-ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.0
+ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.1
 
 #labeling
 LABEL maintainer="netpi@hilscher.com" \
@@ -74,7 +74,7 @@ RUN apt-get update && apt-get install -y \
     '/usr/share/man/man1' '/usr/share/man/man8' '/usr/lib/pkgconfig' '/usr/lib/bluetooth/plugins' \
     '/lib/udev/rules.d' '/lib/systemd/system' '/usr/lib/systemd/user' '/lib/udev' \
 #install userland raspberry pi tools
- && git clone --depth 1 https://github.com/raspberrypi/firmware /tmp/firmware \
+ && git clone -b "1.20180417" --single-branch --depth 1 https://github.com/raspberrypi/firmware /tmp/firmware \
  && mv /tmp/firmware/hardfp/opt/vc /opt \
  && echo "/opt/vc/lib" >/etc/ld.so.conf.d/00-vmcs.conf \
  && /sbin/ldconfig \
@@ -92,7 +92,6 @@ COPY --from=builder /usr/bin/bluetoothctl /usr/bin/btmon /usr/bin/rctest /usr/bi
                     /usr/bin/bccmd /usr/bin/bluemoon /usr/bin/hex2hcd /usr/bin/mpris-proxy /usr/bin/btattach \
                     /usr/bin/hciattach /usr/bin/hciconfig /usr/bin/hcitool /usr/bin/hcidump /usr/bin/rfcomm \
                     /usr/bin/sdptool /usr/bin/ciptool /usr/bin/
-COPY --from=builder /usr/bin/ciptool /usr/bin/
 COPY --from=builder /usr/libexec/bluetooth/bluetoothd /usr/libexec/bluetooth/obexd /usr/libexec/bluetooth/
 COPY --from=builder /usr/lib/cups/backend/bluetooth /usr/lib/cups/backend/
 COPY --from=builder /etc/dbus-1/system.d/bluetooth.conf /etc/dbus-1/system.d/

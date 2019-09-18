@@ -1,6 +1,23 @@
 #!/bin/bash +e
 # catch signals as PID 1 in a container
 
+#check if container is running in host mode
+if [[ -z `grep "docker0" /proc/net/dev` ]]; then
+  echo "Container not running in host mode. Sure you configured host network mode? Container stopped."
+  exit 143
+fi
+
+#check if container is running in privileged mode
+ip link delete dummy0 >/dev/null 2>&1
+ip link add dummy0 type dummy >/dev/null 2>&1
+if [[ $? -eq 0 ]]; then
+    # clean the dummy0 link
+    ip link delete dummy0 >/dev/null 2>&1
+else
+  echo "Container not running in privileged mode. Sure you configured privileged mode? Container stopped."
+  exit 143
+fi
+
 pid=0
 
 # SIGNAL-handler
@@ -36,9 +53,9 @@ echo "starting dbus ..."
 /etc/init.d/dbus start
 
 #reset BCM chip (making sure get access even after container restart)
-/opt/vc/bin/vcmailbox 0x38041 8 8 128 0
+/opt/vc/bin/vcmailbox 0x38041 8 8 128 0  > /dev/null
 sleep 1
-/opt/vc/bin/vcmailbox 0x38041 8 8 128 1
+/opt/vc/bin/vcmailbox 0x38041 8 8 128 1  > /dev/null 
 sleep 1
 
 #load firmware to BCM chip and attach to hci0
