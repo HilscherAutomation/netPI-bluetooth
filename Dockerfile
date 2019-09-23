@@ -50,7 +50,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN [ "cross-build-start" ]
 
 #version
-ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.1
+ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.2
 
 #labeling
 LABEL maintainer="netpi@hilscher.com" \

@@ -8,14 +8,13 @@ if [[ -z `grep "docker0" /proc/net/dev` ]]; then
 fi
 
 #check if container is running in privileged mode
-ip link delete dummy0 >/dev/null 2>&1
 ip link add dummy0 type dummy >/dev/null 2>&1
-if [[ $? -eq 0 ]]; then
-    # clean the dummy0 link
-    ip link delete dummy0 >/dev/null 2>&1
-else
+if [[ -z `grep "dummy0" /proc/net/dev` ]]; then
   echo "Container not running in privileged mode. Sure you configured privileged mode? Container stopped."
   exit 143
+else
+  # clean the dummy0 link
+  ip link delete dummy0 >/dev/null 2>&1
 fi
 
 pid=0
