@@ -2,7 +2,7 @@
 
 [![](https://images.microbadger.com/badges/image/hilschernetpi/netpi-bluetooth.svg)](https://microbadger.com/images/hilschernetpi/netpi-bluetooth "Bluetooth")
 [![](https://images.microbadger.com/badges/commit/hilschernetpi/netpi-bluetooth.svg)](https://microbadger.com/images/hilschernetpi//netpi-bluetooth "Bluetooth")
-[![Docker Registry](https://img.shields.io/docker/pulls/hilschernetpi/netpi-bluetooth.svg)](https://registry.hub.docker.com/u/hilschernetpi/netpi-bluetooth/)&nbsp;
+[![Docker Registry](https://img.shields.io/docker/pulls/hilschernetpi/netpi-bluetooth.svg)](https://registry.hub.docker.com/r/hilschernetpi/netpi-bluetooth/)&nbsp;
 [![Image last updated](https://img.shields.io/badge/dynamic/json.svg?url=https://api.microbadger.com/v1/images/hilschernetpi/netpi-bluetooth&label=Image%20last%20updated&query=$.LastUpdated&colorB=007ec6)](http://microbadger.com/images/hilschernetpi/netpi-bluetooth "Image last updated")&nbsp;
 
 Made for [netPI](https://www.netiot.com/netpi/), the Raspberry Pi 3B Architecture based industrial suited Open Edge Connectivity Ecosystem

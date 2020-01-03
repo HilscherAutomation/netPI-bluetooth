@@ -1,13 +1,13 @@
 #STEP 1 of multistage build ---Compile Bluetooth stack-----
 
 #use armv7hf compatible base image
-FROM balenalib/armv7hf-debian:buster as builder
+FROM balenalib/armv7hf-debian:buster-20191223 as builder
 
 #enable cross compiling (comment out next line if built on Raspberry Pi) 
 RUN [ "cross-build-start" ]
 
 #environment variables
-ENV BLUEZ_VERSION 5.50 
+ENV BLUEZ_VERSION 5.52
 
 RUN apt-get update && apt-get install -y \
     build-essential wget \
@@ -35,7 +35,7 @@ RUN [ "cross-build-end" ]
 #STEP 2 of multistage build ----Create the final image-----
 
 #use armv7hf compatible base image
-FROM balenalib/armv7hf-debian:buster
+FROM balenalib/armv7hf-debian:buster-20191223
 
 #dynamic build arguments coming from the /hooks/build file
 ARG BUILD_DATE
@@ -50,7 +50,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN [ "cross-build-start" ]
 
 #version
-ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.2
+ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.3
 
 #labeling
 LABEL maintainer="netpi@hilscher.com" \
