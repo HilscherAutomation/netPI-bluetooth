@@ -1,6 +1,5 @@
 ## Bluetooth
 
-[![](https://images.microbadger.com/badges/image/hilschernetpi/netpi-bluetooth.svg)](https://microbadger.com/images/hilschernetpi/netpi-bluetooth "Bluetooth")
 [![](https://images.microbadger.com/badges/commit/hilschernetpi/netpi-bluetooth.svg)](https://microbadger.com/images/hilschernetpi//netpi-bluetooth "Bluetooth")
 [![Docker Registry](https://img.shields.io/docker/pulls/hilschernetpi/netpi-bluetooth.svg)](https://registry.hub.docker.com/r/hilschernetpi/netpi-bluetooth/)&nbsp;
 [![Image last updated](https://img.shields.io/badge/dynamic/json.svg?url=https://api.microbadger.com/v1/images/hilschernetpi/netpi-bluetooth&label=Image%20last%20updated&query=$.LastUpdated&colorB=007ec6)](http://microbadger.com/images/hilschernetpi/netpi-bluetooth "Image last updated")&nbsp;
@@ -71,12 +70,6 @@ Use bluez tools such as bluetoothctl, hciconfig, hcitool as usual. For a simple 
 ### Container tips & tricks
 
 For additional help or information visit the Hilscher Forum at https://forum.hilscher.com/
-
-### Container Automated build
-
-The project complies with the scripting based [Dockerfile](https://docs.docker.com/engine/reference/builder/) method to build the image output file. Using this method is a precondition for an [automated](https://docs.docker.com/docker-hub/builds/) web based build process on DockerHub platform.
-
-DockerHub web platform is x86 CPU based, but an ARM CPU coded output file is needed for Raspberry Pi systems. This is why the Dockerfile includes the [balena](https://balena.io/blog/building-arm-containers-on-any-x86-machine-even-dockerhub/) steps.
 
 ### License
 

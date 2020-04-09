@@ -58,7 +58,7 @@ sleep 1
 sleep 1
 
 #load firmware to BCM chip and attach to hci0
-hciattach /dev/ttyAMA0 bcm43xx 921600 noflow
+hciattach /dev/ttyAMA0 bcm43xx 115200 noflow
 
 #create hci0 device
 hciconfig hci0 up

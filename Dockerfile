@@ -3,11 +3,8 @@
 #use armv7hf compatible base image
 FROM balenalib/armv7hf-debian:buster-20191223 as builder
 
-#enable cross compiling (comment out next line if built on Raspberry Pi) 
-RUN [ "cross-build-start" ]
-
 #environment variables
-ENV BLUEZ_VERSION 5.52
+ENV BLUEZ_VERSION 5.54
 
 RUN apt-get update && apt-get install -y \
     build-essential wget \
@@ -28,9 +25,6 @@ RUN wget -P /tmp/ https://www.kernel.org/pub/linux/bluetooth/bluez-${BLUEZ_VERSI
  && make \
 #install bluez tools
  && make install
-#disable cross compiling (comment out next line if built on Raspberry Pi) 
-RUN [ "cross-build-end" ]
-
 
 #STEP 2 of multistage build ----Create the final image-----
 
@@ -46,11 +40,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/HilscherAutomation/netPI-bluetooth" \
       org.label-schema.vcs-ref=$VCS_REF
 
-#enable cross compiling (comment out next line if built on Raspberry Pi) 
-RUN [ "cross-build-start" ]
-
 #version
-ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.3
+ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.4
 
 #labeling
 LABEL maintainer="netpi@hilscher.com" \
@@ -117,5 +108,3 @@ ENTRYPOINT ["/etc/init.d/entrypoint.sh"]
 #set STOPSGINAL
 STOPSIGNAL SIGTERM
 
-#disable cross compiling (comment out next line if built on Raspberry Pi) 
-RUN [ "cross-build-end" ]
