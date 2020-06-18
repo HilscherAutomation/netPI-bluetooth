@@ -51,6 +51,10 @@ echo "starting ssh ..."
 echo "starting dbus ..."
 /etc/init.d/dbus start
 
+#start bluetooth daemon
+/usr/libexec/bluetooth/bluetoothd -d &
+pid="$!"
+
 #reset BCM chip (making sure get access even after container restart)
 /opt/vc/bin/vcmailbox 0x38041 8 8 128 0  > /dev/null
 sleep 1
@@ -62,10 +66,6 @@ hciattach /dev/ttyAMA0 bcm43xx 115200 noflow
 
 #create hci0 device
 hciconfig hci0 up
-
-#start bluetooth daemon
-/usr/libexec/bluetooth/bluetoothd -d &
-pid="$!"
 
 # wait forever not to exit the container
 while true

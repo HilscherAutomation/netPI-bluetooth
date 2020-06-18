@@ -41,7 +41,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-ref=$VCS_REF
 
 #version
-ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.4
+ENV HILSCHERNETPI_BLUEZ_VERSION 1.3.5
 
 #labeling
 LABEL maintainer="netpi@hilscher.com" \
