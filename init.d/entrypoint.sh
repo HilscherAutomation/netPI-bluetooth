@@ -43,9 +43,16 @@ term_handler() {
 # on callback, stop all started processes in term_handler
 trap 'kill ${!}; term_handler' SIGINT SIGKILL SIGTERM SIGQUIT SIGTSTP SIGSTOP SIGHUP
 
-# run applications in the background
-echo "starting ssh ..."
-/etc/init.d/ssh start &
+echo "starting SSH server ..."
+if [ "$SSHPORT" ]; then
+  #there is an alternative SSH port configured
+  echo "the container binds the SSH server port to the configured port $SSHPORT"
+  sed -i -e "s;#Port 22;Port $SSHPORT;" /etc/ssh/sshd_config
+else
+  echo "the container binds the SSH server port to the default port 22"
+fi
+
+sudo /etc/init.d/ssh start
 
 # start docker deamon
 echo "starting dbus ..."
