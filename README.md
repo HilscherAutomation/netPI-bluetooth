@@ -1,10 +1,10 @@
 ## Bluetooth
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Docker Registry](https://img.shields.io/docker/pulls/hilschernetpi/netpi-bluetooth.svg)](https://registry.hub.docker.com/r/hilschernetpi/netpi-bluetooth/)&nbsp;
-[![Image last updated](https://img.shields.io/badge/dynamic/json.svg?url=https://api.microbadger.com/v1/images/hilschernetpi/netpi-bluetooth&label=Image%20last%20updated&query=$.LastUpdated&colorB=007ec6)](http://microbadger.com/images/hilschernetpi/netpi-bluetooth "Image last updated")&nbsp;
-
 Made for Raspberry Pi 3B architecture based devices and compatibles
+
+### Docker repository
+
+https://hub.docker.com/r/hilschernetpi/netpi-bluetooth/
 
 ### Container features
 
@@ -70,10 +70,10 @@ Parameter | Value | Remark
 *Image* | **hilschernetpi/netpi-bluetooth** |
 *Network > Network* | **host** |
 *Restart policy* | **always**
-*Runtime > Env* | *name* **SSHPORT** -> *value* **any number value** | optional for different SSH port
-*Runtime > Devices > +add device* | *Host path* **/dev/ttyAMA0** -> *Container path* **/dev/ttyAMA0** |
-*Runtime > Devices > +add device* | *Host path* **/dev/vcio** -> *Container path* **/dev/vcio** | 
-*Runtime > Privileged mode* | **On** |
+*Adv.con.set. > Env > > +add env.var.* | *name* **SSHPORT** -> *value* **any number value** | optional for different SSH port
+*Adv.con.set. > Devices > +add device* | *Host path* **/dev/ttyAMA0** -> *Container path* **/dev/ttyAMA0** |
+*Adv.con.set. > Devices > +add device* | *Host path* **/dev/vcio** -> *Container path* **/dev/vcio** | 
+*Adv.con.set. > Privileged mode* | **On** |
 
 STEP 4. Press the button *Actions > Start/Deploy container*
 
